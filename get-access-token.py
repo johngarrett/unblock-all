@@ -47,9 +47,9 @@ def get_access_token(consumer_key, consumer_secret):
 
 def unblock_all(consumer_key, consumer_secret, access_token_key, access_token_secret):
     api = twitter.Api(consumer_key, consumer_secret, access_token_key, access_token_secret)
-    for blocked_id in api.GetBlocksIDs():
-        print(f'Unblocking userid: {blocked_id}')
-        api.DestroyBlock(user_id=blocked_id)
+    for user in api.GetBlocks():
+        print(f'Unblocking "{user.name}" @{user.screen_name}')
+        api.DestroyBlock(user.id)
 
 def main():
     consumer_key = input('Enter your consumer key: ')
